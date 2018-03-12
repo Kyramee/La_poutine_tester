@@ -1,9 +1,10 @@
 Répartition des tâches ->
 
 Steven:
--> Fait le bufferredWritter pour écrire dans le fichier.
+-> Fait le bufferredWritter pour écrire dans le fichier
 -> Modifier la methode affichageFacture pour qu'elle convienne aux nouvelles exigences
 -> Test la méthode affichageFacture
 
 Adrien:
 -> Test toutes les méthodes à l'exeption de la méthode affichageFacture
+-> Modifier les méthodes pour faciliter les tests
