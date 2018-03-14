@@ -15,8 +15,14 @@ class testPoutine {
 	}
 	
 	@Test
-	void testAddListeNomPlats() {
+	void testAddListePlats() {
 		this.fMock.addListePlats("McCoke 11.99");
 		Mockito.verify(this.fMock).addListePlats("McCoke 11.99");
+	}
+	
+	@Test
+	void testAddListeCommandes() {
+		this.fMock.addListeCommandes("McCoke 11.99");
+		Mockito.verify(this.fMock).addListeCommandes("McCoke 11.99");
 	}
 }
