@@ -1,28 +1,30 @@
 package test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+
 
 import poutine.Facture;
 
 class testPoutine {
-	Facture fMock = Mockito.mock(Facture.class);
+	Facture f = new Facture();
 	
 	@Test
 	void testAddListeClient() {
-		this.fMock.addListeClients("Steven");
-		Mockito.verify(this.fMock).addListeClients("Steven");
+		this.f.addListeClients("Steven");
+		assertEquals("Steven", this.f.getListeClients().get(0));
 	}
 	
 	@Test
 	void testAddListePlats() {
-		this.fMock.addListePlats("McCoke 11.99");
-		Mockito.verify(this.fMock).addListePlats("McCoke 11.99");
+		this.f.addListePlats("McCoke 11.99");
+		assertEquals("McCoke", this.f.getListeNomPlats().get(0));
+		assertEquals("11.99", this.f.getListePrixPlats().get(0));
 	}
 	
 	@Test
 	void testAddListeCommandes() {
-		this.fMock.addListeCommandes("McCoke 11.99");
-		Mockito.verify(this.fMock).addListeCommandes("McCoke 11.99");
+		this.f.addListeCommandes("Steven McCoke 6");
+		assertEquals("Steven McCoke 6", this.f.getListeCommandes().get(0));
 	}
 }

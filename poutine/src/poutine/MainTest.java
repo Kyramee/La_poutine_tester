@@ -16,19 +16,9 @@ public class MainTest {
 		Path chemin = null;
 		Facture facture;
 
-		try {
-			chemin = Paths.get("commande.txt");
-		} catch (InvalidPathException errNomFichier) {
-			System.out.print(errNomFichier);
+		chemin = trouverDossier();
 
-		}
-
-		try {
-			ficLecture = Files.newBufferedReader(chemin, Charset.defaultCharset());
-		} catch (IOException err) {
-			System.out.print(err);
-
-		}
+		ficLecture = ouvrirFichier(chemin);
 
 		facture = new Facture();
 
@@ -36,6 +26,28 @@ public class MainTest {
 
 		facture.affichageFacture();
 
+	}
+
+	public static BufferedReader ouvrirFichier(Path chemin) {
+		BufferedReader ficLecture = null;
+		try {
+			ficLecture = Files.newBufferedReader(chemin, Charset.defaultCharset());
+		} catch (IOException err) {
+			System.out.print(err);
+		}
+		
+		return ficLecture;
+	}
+
+	public static Path trouverDossier() {
+		Path chemin = null;
+		try {
+			chemin = Paths.get("commande.txt");
+		} catch (InvalidPathException errNomFichier) {
+			System.out.print(errNomFichier);
+		}
+		
+		return chemin;
 	}
 
 	public static void lecture(BufferedReader ficLecture, Facture facture) throws IOException {
