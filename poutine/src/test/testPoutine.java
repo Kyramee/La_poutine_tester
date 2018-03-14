@@ -1,8 +1,11 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Paths;
 
 import poutine.Facture;
 import poutine.MainTest;
@@ -32,5 +35,10 @@ class testPoutine {
 	@Test
 	void testTrouverDossier() {
 		assertEquals("C:\\eclispe\\poutine\\commande.txt", MainTest.trouverDossier().toString());
+	}
+	
+	@Test
+	void testOuvrirDossier() {
+		assertNotEquals(null, MainTest.ouvrirDossier(Paths.get("C:\\eclispe\\poutine\\commande.txt")));
 	}
 }

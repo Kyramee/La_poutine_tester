@@ -18,7 +18,7 @@ public class MainTest {
 
 		chemin = trouverDossier();
 
-		ficLecture = ouvrirFichier(chemin);
+		ficLecture = ouvrirDossier(chemin);
 
 		facture = new Facture();
 
@@ -28,7 +28,7 @@ public class MainTest {
 
 	}
 
-	public static BufferedReader ouvrirFichier(Path chemin) {
+	public static BufferedReader ouvrirDossier(Path chemin) {
 		BufferedReader ficLecture = null;
 		try {
 			ficLecture = Files.newBufferedReader(chemin, Charset.defaultCharset());
