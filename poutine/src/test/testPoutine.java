@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 
 import poutine.Facture;
+import poutine.MainTest;
 
 class testPoutine {
 	Facture f = new Facture();
@@ -26,5 +27,10 @@ class testPoutine {
 	void testAddListeCommandes() {
 		this.f.addListeCommandes("Steven McCoke 6");
 		assertEquals("Steven McCoke 6", this.f.getListeCommandes().get(0));
+	}
+	
+	@Test
+	void testTrouverDossier() {
+		assertEquals("C:\\eclispe\\poutine\\commande.txt", MainTest.trouverDossier().toString());
 	}
 }

@@ -42,7 +42,7 @@ public class MainTest {
 	public static Path trouverDossier() {
 		Path chemin = null;
 		try {
-			chemin = Paths.get("commande.txt");
+			chemin = Paths.get("commande.txt").toAbsolutePath();
 		} catch (InvalidPathException errNomFichier) {
 			System.out.print(errNomFichier);
 		}
