@@ -63,6 +63,8 @@ public class MainTest {
 		while (!(ligne = ficLecture.readLine()).contains("Fin")) {
 			facture.addListeCommandes(ligne);
 		}
+		
+		ficLecture.close();
 	}
 
 }
