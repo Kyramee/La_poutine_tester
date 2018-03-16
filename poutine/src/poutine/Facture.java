@@ -1,6 +1,13 @@
 package poutine;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Facture {
 
@@ -8,6 +15,7 @@ public class Facture {
 	private ArrayList<String> listeNomPlats;
 	private ArrayList<String> listePrixPlats;
 	private ArrayList<String> listeCommandes;
+	private BufferedWriter ficEcriture;
 
 	// Constructeur
 	public Facture() {
@@ -16,23 +24,23 @@ public class Facture {
 		this.listePrixPlats = new ArrayList<>();
 		this.listeCommandes = new ArrayList<>();
 	}
-	
-	public ArrayList<String> getListeClients(){
+
+	public ArrayList<String> getListeClients() {
 		return this.listeClients;
 	}
-	
-	public ArrayList<String> getListeNomPlats(){
+
+	public ArrayList<String> getListeNomPlats() {
 		return this.listeNomPlats;
 	}
-	
-	public ArrayList<String> getListePrixPlats(){
+
+	public ArrayList<String> getListePrixPlats() {
 		return this.listePrixPlats;
 	}
-	
-	public ArrayList<String> getListeCommandes(){
+
+	public ArrayList<String> getListeCommandes() {
 		return this.listeCommandes;
 	}
-	
+
 	public void addListeClients(String client) {
 		this.listeClients.add(client);
 
@@ -49,31 +57,94 @@ public class Facture {
 	}
 
 	public void affichageFacture() {
+
+		boolean valide = ecriture();
+
 		String[] comSplit;
 		int index = 0;
 		double[] facture = new double[this.listeClients.size()];
-		
-		System.out.println("Bienvenue chez Barette!\nFactures:");
 
-		for (String commande : this.listeCommandes) {
-			comSplit = commande.split(" ");
+		System.out.println("Bienvenue chez Barette!");
+		ecrire("Bienvenue chez Barette!");
 
-			if (comSplit.length != 3) {
-				System.out.println("Format de commande invalide");
-			} else if (!this.listeClients.contains(comSplit[0])) {
-				System.out.println("Le nom du client n'est pas dans la liste");
-			} else if (!this.listeNomPlats.contains(comSplit[1])) {
-				System.out.println("Le nom du plat n'est pas dans la liste");
-			} else {
+		if (valide) {
+			for (String commande : this.listeCommandes) {
+				comSplit = commande.split(" ");
 
-				facture[this.listeClients.indexOf(comSplit[0])] += Double
-						.parseDouble(this.listePrixPlats.get(this.listeNomPlats.indexOf(comSplit[1])))
-						* Double.parseDouble(comSplit[2]);
+				if (comSplit.length != 3) {
+					System.out.println("Il y a une commande qui possède un format de commande invalide");
+					ecrire("Il y a une commande qui possède un format de commande invalide");
+
+				} else if (!this.listeClients.contains(comSplit[0])) {
+					System.out.println("Le nom du client " + comSplit[0] + " n'est pas dans la liste");
+					ecrire("Le nom du client " + comSplit[0] + " n'est pas dans la liste");
+
+				} else if (!this.listeNomPlats.contains(comSplit[1])) {
+					System.out.println("Le nom du plat " + comSplit[1] + " pour le client " + comSplit[0] + " n'est pas dans la liste");
+					ecrire("Le nom du plat " + comSplit[1] + " pour le client " + comSplit[0] + " n'est pas dans la liste");
+
+				} else if (Integer.parseInt(comSplit[2]) < 1) {
+					System.out.println("La quantité de nourriture ne peux pas être négative ou égal à 0");
+					ecrire("La quantité de nourriture ne peux pas être négative ou égal à 0");
+
+				} else {
+					facture[this.listeClients.indexOf(comSplit[0])] += Double.parseDouble(this.listePrixPlats.get(this.listeNomPlats.indexOf(comSplit[1])))* Double.parseDouble(comSplit[2]);
+				}
+			}
+
+			System.out.println("\nFactures:");
+			try {
+				ficEcriture.newLine();
+				ecrire("Factures:");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			for (String nom : this.listeClients) {
+				if (facture[index] != 0.0) {
+
+					double tps = facture[index] * 0.05, tvq = facture[index] * 0.10;
+
+					String message = nom + " " + facture[index++] + "$, TPS: " + tps + "$ TVQ: " + tvq + "$";
+					System.out.println(message);
+					ecrire(message);
+				}
+			}
+
+			try {
+				ficEcriture.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
-		
-		for (String nom : this.listeClients) {
-			System.out.println(nom + " " + facture[index++] + "$");
+	}
+
+	private void ecrire(String message) {
+		try {
+			ficEcriture.write(message);
+			ficEcriture.newLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+
+	private boolean ecriture() {
+		String timeStamp = new SimpleDateFormat("dd_MM_yy-HH;mm").format(Calendar.getInstance().getTime());
+
+		boolean valide = true;
+		String filename = "Facture-du-" + timeStamp + ".txt";
+
+		try {
+			ficEcriture = new BufferedWriter(
+					new OutputStreamWriter(new FileOutputStream(filename), Charset.defaultCharset()));
+		} catch (IOException err) {
+			System.out.print(err);
+			valide = false;
+		}
+
+		return valide;
 	}
 }
