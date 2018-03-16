@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -126,9 +127,9 @@ public class Facture {
 			for ( String nom : this.listeClients ) {
 				if ( facture[index] != 0.0 ) {
 					
-					double tps = facture[index] * 0.05, tvq = facture[index] * 0.10;
-					
-					String message = nom + " " + facture[index++] + "$, TPS: "+tps+"$ TVQ: "+tvq+"$";					
+					double prix = facture[index++], tps = prix * 0.05, tvq = prix * 0.10;
+					DecimalFormat df = new DecimalFormat( "#.##" );
+					String message = nom + " " + df.format( prix ) + "$, TPS: "+df.format( tps )+"$ TVQ: "+df.format( tvq )+"$ Total: "+df.format( prix+tps+tvq )+"$";
 					System.out.println( message );
 					
 					try {
