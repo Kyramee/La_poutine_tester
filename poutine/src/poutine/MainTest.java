@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 public class MainTest {
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
 		BufferedReader ficLecture = null;
 		Path chemin = null;
 		Facture facture;

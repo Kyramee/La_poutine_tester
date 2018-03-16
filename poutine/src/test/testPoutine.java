@@ -16,19 +16,23 @@ class testPoutine {
 	@Test
 	void testAddListeClient() {
 		this.f.addListeClients("Steven");
+		//test aussi la methode associé
 		assertEquals("Steven", this.f.getListeClients().get(0));
 	}
 	
 	@Test
 	void testAddListePlats() {
 		this.f.addListePlats("McCoke 11.99");
+		//test aussi la methode associé
 		assertEquals("McCoke", this.f.getListeNomPlats().get(0));
+		//test aussi la methode associé
 		assertEquals("11.99", this.f.getListePrixPlats().get(0));
 	}
 	
 	@Test
 	void testAddListeCommandes() {
 		this.f.addListeCommandes("Steven McCoke 6");
+		//test aussi la methode associéS
 		assertEquals("Steven McCoke 6", this.f.getListeCommandes().get(0));
 	}
 	
