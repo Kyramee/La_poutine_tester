@@ -11,24 +11,13 @@ import java.nio.file.Paths;
 public class MainTest {
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
 		BufferedReader ficLecture = null;
 		Path chemin = null;
 		Facture facture;
 
-		try {
-			chemin = Paths.get("commande.txt");
-		} catch (InvalidPathException errNomFichier) {
-			System.out.print(errNomFichier);
+		chemin = trouverDossier();
 
-		}
-
-		try {
-			ficLecture = Files.newBufferedReader(chemin, Charset.defaultCharset());
-		} catch (IOException err) {
-			System.out.print(err);
-
-		}
+		ficLecture = ouvrirDossier(chemin);
 
 		facture = new Facture();
 
@@ -37,21 +26,27 @@ public class MainTest {
 		facture.affichageFacture();
 
 	}
-	
-	static public void TestLecture(Path chemin) throws IOException{
+
+	public static BufferedReader ouvrirDossier(Path chemin) {
 		BufferedReader ficLecture = null;
 		try {
 			ficLecture = Files.newBufferedReader(chemin, Charset.defaultCharset());
 		} catch (IOException err) {
 			System.out.print(err);
-
 		}
+		
+		return ficLecture;
+	}
 
-		 Facture facture = new Facture();
-
-		lecture(ficLecture, facture);
-
-		facture.affichageFacture();
+	public static Path trouverDossier() {
+		Path chemin = null;
+		try {
+			chemin = Paths.get("commande.txt").toAbsolutePath();
+		} catch (InvalidPathException errNomFichier) {
+			System.out.print(errNomFichier);
+		}
+		
+		return chemin;
 	}
 
 	public static void lecture(BufferedReader ficLecture, Facture facture) throws IOException {
@@ -68,6 +63,8 @@ public class MainTest {
 		while (!(ligne = ficLecture.readLine()).contains("Fin")) {
 			facture.addListeCommandes(ligne);
 		}
+		
+		ficLecture.close();
 	}
 
 }
