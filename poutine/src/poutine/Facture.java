@@ -97,7 +97,6 @@ public class Facture {
 				ficEcriture.newLine();
 				ecrire("Factures:");
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
@@ -106,7 +105,7 @@ public class Facture {
 
 					double tps = facture[index] * 0.05, tvq = facture[index] * 0.10;
 
-					String message = nom + " " + facture[index++] + "$, TPS: " + tps + "$ TVQ: " + tvq + "$";
+					String message = nom + " " + facture[index++] + "$, TPS: " + (double)Math.round(tps * 100) / 100 + "$ TVQ: " + tvq + "$";
 					System.out.println(message);
 					ecrire(message);
 				}
@@ -115,7 +114,6 @@ public class Facture {
 			try {
 				ficEcriture.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -126,7 +124,6 @@ public class Facture {
 			ficEcriture.write(message);
 			ficEcriture.newLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

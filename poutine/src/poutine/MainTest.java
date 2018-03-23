@@ -11,20 +11,13 @@ import java.nio.file.Paths;
 public class MainTest {
 
 	public static void main(String[] args) throws IOException {
-		BufferedReader ficLecture = null;
-		Path chemin = null;
 		Facture facture;
-
-		chemin = trouverDossier();
-
-		ficLecture = ouvrirDossier(chemin);
 
 		facture = new Facture();
 
-		lecture(ficLecture, facture);
+		lecture(ouvrirDossier(trouverDossier()), facture);
 
 		facture.affichageFacture();
-
 	}
 
 	public static BufferedReader ouvrirDossier(Path chemin) {
