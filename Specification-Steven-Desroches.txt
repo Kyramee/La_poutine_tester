@@ -1,0 +1,10 @@
+Tâches:
+-> Tester la méthode d'affichageFacture et modifier celle-ci pour qu'elle puisse faire ce que Barette veut.
+
+Spécifications liées à la tâche:
+
+-> Ajouté une création de fichier avec un OutputStreamWriter
+-> Faire en sorte que le nom du fichier change en fonction de la date et de l'heure
+-> Ajouté un bufferedwriter pour écrire dans ce fichier
+-> Ajouté le calcul de la TVQ et de la TPS
+-> Testé cette méthode

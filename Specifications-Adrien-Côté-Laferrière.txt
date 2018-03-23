@@ -1,0 +1,26 @@
+Tâches:
+-> Tester toute les methodes (incluant le main) sauf affichageFacture
+
+Spécifications liées à la tâche:
+
+-> Description des testes effectués sur les méthodes:
+	=> trouverCommande:
+		Tester si la méthode est capable de trouver le document commande.txt et tester la réponse si introuver
+
+	=> ouvrirCommande:
+		Tester si la méthode est capable d'ouvrir le document en mode lecture avec BufferedReader et tester la réponse si incapable
+
+	=> lecture:
+		Tester si la méthode est capable de trier les différent élément de la commande
+
+	=> addListeClients:	
+		Tester si la méthode ajoute au ArrayList listeClients les données recus
+
+	=> addListePlats:
+		Tester si la méthode ajoute aux ArrayList listNomPlats et listPrixPlats les données recus dans le bon ArrayList
+
+	=> addListeCommandes
+		Tester si la méthode ajoute au ArrayList listeCommandes les données
+
+	=> main:
+		Tester si la méthode enchaine toutes les autres méthodes et tester si l'une ou l'autre des méthodes enchainées produit une erreure
