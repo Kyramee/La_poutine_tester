@@ -38,11 +38,11 @@ class testPoutine {
 	
 	@Test
 	void testTrouverDossier() {
-		assertEquals("C:\\eclispe\\poutine\\commande.txt", MainTest.trouverDossier().toString());
+		assertEquals(Paths.get("commande.txt").toAbsolutePath(), MainTest.trouverDossier());
 	}
 	
 	@Test
 	void testOuvrirDossier() {
-		assertNotEquals(null, MainTest.ouvrirDossier(Paths.get("C:\\eclispe\\poutine\\commande.txt")));
+		assertNotEquals(null, MainTest.ouvrirDossier(Paths.get("commande.txt").toAbsolutePath()));
 	}
 }
